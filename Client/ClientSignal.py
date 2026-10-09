@@ -9,13 +9,13 @@ from Entreprise.models import Eses
 def CreateTenant(sender, instance, created, **kwargs):
     if not created:
         dom = Domain.objects.filter(tenant_id = instance.id_enreg).first()
-        dom.domain = instance.nom_domaine + "." + "web-api-vi48.onrender.com/"
+        dom.domain = "web-api-vi48.onrender.com/" + instance.nom_domaine 
         dom.save()
 
 
     else: 
         domain = Domain()
-        domaine = instance.nom_domaine + "." + "web-api-vi48.onrender.com/"   # LE SOUS DOMAINE DE L'ENTREPRISE #
+        domaine = "web-api-vi48.onrender.com/" + instance.nom_domaine   # LE SOUS DOMAINE DE L'ENTREPRISE #
         domain.domain = domaine
         domain.tenant = instance     # domain.tenant = client
         domain.is_primary = True
