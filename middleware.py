@@ -15,7 +15,7 @@ from django_tenants.utils import (
 )
 
 def get_hostname(request):
-    return request.get_host().split(':')[0].lower()
+    return request.get_host().split('/')[0].lower()
 
 def get_tenant(request):
     hostname  = get_hostname(request)
@@ -82,7 +82,7 @@ class BaseTenantMiddleware(django.utils.deprecation.MiddlewareMixin):
         """ Extracts hostname from request. Used for custom requests filtering.
             By default removes the request's port and common prefixes.
         """
-        return remove_www(request.get_host().split(":")[0]).lower()
+        return remove_www(request.get_host().split("/")[0]).lower()
 
     def process_request(self, request):
         # Connection needs first to be at the public schema, as this is where
